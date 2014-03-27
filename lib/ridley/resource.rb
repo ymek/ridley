@@ -110,7 +110,8 @@ module Ridley
     # @return [Object, nil]
     def update(object)
       resource = new(object.to_hash)
-      new(request(:put, "#{self.class.resource_path}/#{resource.chef_id}", resource.to_json))
+      #new(request(:put, "#{self.class.resource_path}/#{resource.chef_id}", resource.to_json))
+      new(request(:post, "#{self.class.resource_path}/#{resource.chef_id}", resource.to_json))
     rescue AbortError => ex
       return nil if ex.cause.is_a?(Errors::HTTPConflict)
       abort(ex.cause)
